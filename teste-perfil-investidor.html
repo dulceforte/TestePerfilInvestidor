@@ -1,0 +1,293 @@
+<!doctype html>
+<html lang="pt">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Teste do Perfil de Investidor</title>
+  <style>
+    :root{
+      --bg:#0f172a;      /* slate-900 */
+      --card:#111827;    /* gray-900 */
+      --muted:#94a3b8;   /* slate-400 */
+      --text:#e5e7eb;    /* gray-200 */
+      --accent:#22d3ee;  /* cyan-400 */
+      --accent2:#a78bfa; /* violet-400 */
+      --ok:#34d399;      /* green-400 */
+      --warn:#f59e0b;    /* amber-500 */
+      --danger:#f87171;  /* red-400 */
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,"Helvetica Neue",Arial,"Apple Color Emoji","Segoe UI Emoji";
+      background: radial-gradient(1200px 600px at 80% -10%, rgba(34,211,238,.15), transparent),
+                  radial-gradient(800px 500px at -10% 20%, rgba(167,139,250,.12), transparent),
+                  var(--bg);
+      color:var(--text);
+      line-height:1.55;
+    }
+    .wrap{
+      max-width:980px;
+      margin:40px auto;
+      padding:0 20px;
+    }
+    header{
+      text-align:center;
+      margin-bottom:24px;
+    }
+    h1{
+      font-size: clamp(1.6rem, 3vw, 2.4rem);
+      margin:0 0 10px;
+      letter-spacing:.3px;
+    }
+    p.lead{
+      color:var(--muted);
+      margin:0 auto;
+      max-width: 760px;
+    }
+    .card{
+      background: linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.01));
+      border:1px solid rgba(255,255,255,.08);
+      border-radius:16px;
+      padding:22px;
+      box-shadow: 0 10px 30px rgba(0,0,0,.35);
+      backdrop-filter: blur(6px);
+      margin: 18px 0;
+    }
+    fieldset{
+      border:0;
+      margin:0;
+      padding:0;
+    }
+    legend{
+      font-weight:600;
+      margin-bottom:10px;
+      font-size:1.05rem;
+    }
+    .question{ margin:16px 0 8px; }
+    .option{
+      display:flex;
+      gap:10px;
+      align-items:flex-start;
+      padding:10px 12px;
+      margin:8px 0;
+      border:1px solid rgba(255,255,255,.08);
+      border-radius:12px;
+      cursor:pointer;
+      transition: border .2s, background .2s;
+    }
+    .option:hover{ border-color: rgba(34,211,238,.55); background: rgba(34,211,238,.05);}
+    input[type="radio"]{ transform: translateY(2px); }
+    .muted{ color:var(--muted); font-size:.95rem; }
+    .controls{
+      display:flex; flex-wrap:wrap; gap:10px; margin-top:14px;
+    }
+    button{
+      border:1px solid rgba(255,255,255,.15);
+      background: linear-gradient(180deg, rgba(34,211,238,.18), rgba(34,211,238,.08));
+      color:#002b32;
+      font-weight:600;
+      padding:12px 16px;
+      border-radius:12px;
+      cursor:pointer;
+      transition: transform .03s ease, box-shadow .2s ease;
+      box-shadow: 0 6px 20px rgba(34,211,238,.25);
+    }
+    button:hover{ box-shadow: 0 8px 24px rgba(34,211,238,.35); }
+    button:active{ transform: translateY(1px); }
+    button.secondary{
+      background: linear-gradient(180deg, rgba(167,139,250,.2), rgba(167,139,250,.08));
+      color:#1c1137;
+      box-shadow: 0 6px 20px rgba(167,139,250,.25);
+    }
+    .result{
+      display:none;
+      padding:18px;
+      border-radius:14px;
+      border:1px dashed rgba(255,255,255,.18);
+      margin-top:16px;
+    }
+    .badge{ 
+      display:inline-block; padding:6px 10px; border-radius:999px; 
+      font-size:.85rem; letter-spacing:.3px; margin-bottom:8px;
+      background: rgba(255,255,255,.1);
+      border:1px solid rgba(255,255,255,.2);
+    }
+    .grid{
+      display:grid;
+      grid-template-columns: repeat(2, minmax(0,1fr));
+      gap:12px;
+    }
+    @media (max-width:720px){ .grid{ grid-template-columns: 1fr; } }
+    .small{ font-size:.9rem; color:var(--muted); }
+    footer{ text-align:center; margin:28px 0 12px; color:var(--muted); font-size:.9rem; }
+    a{ color: var(--accent); }
+    .range-explain li{ margin:4px 0; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <h1>Teste do Perfil de Investidor</h1>
+      <p class="lead">Este questionário identifica o seu perfil — <strong>Conservador</strong>, <strong>Moderado</strong> ou <strong>Agressivo</strong> — considerando tolerância ao risco, necessidades de liquidez e horizonte temporal. Não há respostas certas ou erradas.</p>
+    </header>
+
+    <form id="quiz" class="card" autocomplete="off">
+      <fieldset>
+        <legend>1) Tolerância ao Risco</legend>
+        <p class="muted question">Qual é a perda aproximada em qualquer período de um ano que está disposto(a) a aceitar antes de alterar os seus investimentos?</p>
+        <label class="option"><input type="radio" name="q1" value="1"> Menos de 5%</label>
+        <label class="option"><input type="radio" name="q1" value="2"> 5% a 10%</label>
+        <label class="option"><input type="radio" name="q1" value="3"> 10% a 15%</label>
+        <label class="option"><input type="radio" name="q1" value="4"> 15% a 25%</label>
+        <label class="option"><input type="radio" name="q1" value="5"> 25% ou mais</label>
+      </fieldset>
+
+      <fieldset>
+        <legend>2) Objetivos e Necessidades de Liquidez</legend>
+        <p class="muted question">Quando investe dinheiro, qual é o seu objetivo principal?</p>
+        <label class="option"><input type="radio" name="q2" value="1"> Preservar o valor dos meus investimentos</label>
+        <label class="option"><input type="radio" name="q2" value="2"> Minimizar o risco de perdas</label>
+        <label class="option"><input type="radio" name="q2" value="3"> Aumentar o rendimento atual, com segurança razoável</label>
+        <label class="option"><input type="radio" name="q2" value="4"> Gerar rendimento e aumentar gradualmente o valor ao longo do tempo</label>
+        <label class="option"><input type="radio" name="q2" value="4"> Fazer o valor crescer com algum risco</label>
+        <label class="option"><input type="radio" name="q2" value="5"> Fazer o valor crescer substancialmente, aceitando risco elevado</label>
+      </fieldset>
+
+      <fieldset>
+        <legend>3) Horizonte Temporal</legend>
+        <p class="muted question">Qual é o primeiro momento em que prevê precisar de todo ou de uma parte substancial dos seus investimentos?</p>
+        <label class="option"><input type="radio" name="q3" value="1"> Curto prazo — 0 a 2 anos</label>
+        <label class="option"><input type="radio" name="q3" value="3"> Médio prazo — 2 a 5 anos</label>
+        <label class="option"><input type="radio" name="q3" value="5"> Longo prazo — 5 anos ou mais</label>
+      </fieldset>
+
+      <fieldset>
+        <legend>4) Experiência Financeira</legend>
+        <p class="muted question">Como descreveria a sua experiência em investimentos?</p>
+        <label class="option"><input type="radio" name="q4" value="1"> Nenhuma — nunca investi antes</label>
+        <label class="option"><input type="radio" name="q4" value="2"> Alguma — investimentos simples (ex.: depósitos a prazo)</label>
+        <label class="option"><input type="radio" name="q4" value="3"> Boa — fundos ou ações de baixo risco</label>
+        <label class="option"><input type="radio" name="q4" value="4"> Experiente — produtos diversificados e risco médio</label>
+        <label class="option"><input type="radio" name="q4" value="5"> Avançada — ações, ETFs, criptomoedas ou derivados</label>
+      </fieldset>
+
+      <fieldset>
+        <legend>5) Situação Financeira Atual</legend>
+        <p class="muted question">Qual das opções melhor representa a sua situação financeira?</p>
+        <label class="option"><input type="radio" name="q5" value="1"> Rendimentos estáveis e poucas poupanças</label>
+        <label class="option"><input type="radio" name="q5" value="2"> Algumas poupanças e rendimentos estáveis</label>
+        <label class="option"><input type="radio" name="q5" value="3"> Boas poupanças e capacidade de investir parte dos rendimentos</label>
+        <label class="option"><input type="radio" name="q5" value="5"> Património significativo e fontes de rendimento diversificadas</label>
+      </fieldset>
+
+      <div class="controls">
+        <button type="button" id="calc">Calcular perfil</button>
+        <button type="reset" class="secondary" id="limpar">Limpar</button>
+      </div>
+
+      <div id="resultado" class="result card">
+        <div id="badge" class="badge">Resultado</div>
+        <h3 id="perfil">—</h3>
+        <p id="explicacao" class="muted"></p>
+        <div class="grid">
+          <div>
+            <h4>Total de pontos</h4>
+            <p id="pontos" style="font-size:1.4rem; margin:.3rem 0 0;"><strong>0</strong></p>
+            <p class="small">Intervalos: 5–10 (Conservador), 11–17 (Moderado), 18–25 (Agressivo)</p>
+          </div>
+          <div>
+            <h4>Notas</h4>
+            <ul class="small range-explain">
+              <li><strong>Conservador:</strong> privilegia segurança e liquidez.</li>
+              <li><strong>Moderado:</strong> equilíbrio entre rentabilidade e risco.</li>
+              <li><strong>Agressivo:</strong> aceita maior volatilidade para crescer no longo prazo.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </form>
+
+    <section class="card">
+      <h3>Perguntas frequentes</h3>
+      <details>
+        <summary>O que faço com o resultado?</summary>
+        <p class="muted">Use o perfil como orientação para construir a alocação de ativos adequada aos seus objetivos e prazos. Reavalie o perfil periodicamente ou quando a sua situação mudar.</p>
+      </details>
+      <details>
+        <summary>Posso guardar o resultado?</summary>
+        <p class="muted">Sim. Imprima esta página (Ctrl/Cmd+P) ou exporte para PDF para arquivar o resultado.</p>
+      </details>
+    </section>
+
+    <footer>© <span id="ano"></span> — Teste do Perfil de Investidor</footer>
+  </div>
+
+  <script>
+    const btn = document.getElementById('calc');
+    const res = document.getElementById('resultado');
+    const pontosEl = document.getElementById('pontos');
+    const perfilEl = document.getElementById('perfil');
+    const explicacaoEl = document.getElementById('explicacao');
+    const badge = document.getElementById('badge');
+    const ano = document.getElementById('ano');
+    ano.textContent = new Date().getFullYear();
+
+    function somarPontuacao(form){
+      let total = 0;
+      for (let i=1;i<=5;i++){
+        const sel = form.querySelector(`input[name="q${i}"]:checked`);
+        if(!sel) return null;
+        total += parseInt(sel.value,10);
+      }
+      return total;
+    }
+
+    function interpretar(total){
+      if (total <= 10) {
+        return {
+          nome: 'Perfil Conservador',
+          cor: 'linear-gradient(180deg, rgba(52,211,153,.2), rgba(52,211,153,.08))',
+          borda: '1px solid rgba(52,211,153,.35)',
+          texto: 'Prefere segurança e liquidez. Foca-se em produtos de baixo risco e estabilidade do capital.'
+        };
+      } else if (total <= 17) {
+        return {
+          nome: 'Perfil Moderado',
+          cor: 'linear-gradient(180deg, rgba(245,158,11,.2), rgba(245,158,11,.08))',
+          borda: '1px solid rgba(245,158,11,.35)',
+          texto: 'Equilibra rentabilidade e segurança. Aceita alguma flutuação para obter ganhos consistentes a médio prazo.'
+        };
+      } else {
+        return {
+          nome: 'Perfil Agressivo',
+          cor: 'linear-gradient(180deg, rgba(248,113,113,.2), rgba(248,113,113,.08))',
+          borda: '1px solid rgba(248,113,113,.35)',
+          texto: 'Busca crescimento de longo prazo e aceita maior volatilidade e risco nas aplicações.'
+        };
+      }
+    }
+
+    btn.addEventListener('click', () => {
+      const form = document.getElementById('quiz');
+      const total = somarPontuacao(form);
+      if (total === null){
+        alert('Por favor, responda a todas as perguntas.');
+        return;
+      }
+      const {nome, cor, borda, texto} = interpretar(total);
+      res.style.display = 'block';
+      res.style.background = cor;
+      res.style.border = borda;
+      perfilEl.textContent = nome;
+      explicacaoEl.textContent = texto;
+      pontosEl.querySelector('strong').textContent = total;
+      badge.textContent = 'Resultado';
+    });
+
+    document.getElementById('limpar').addEventListener('click', () => {
+      res.style.display = 'none';
+    });
+  </script>
+</body>
+</html>
